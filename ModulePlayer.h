@@ -25,4 +25,6 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+
+	vec3 distCamera;
 };
