@@ -34,35 +34,62 @@ bool ModuleSceneIntro::Start()
 	curve_1.SetPos(3.5,0.9f,37.5);
 	curve_1.SetRotation(-30, vec3(0,1, 0));
 	walls.add(curve_1);
+	//------------------------
 	Cube curve_2(1, 2, 7);
 	curve_2.SetPos(0.7, 0.9f, 42.5);
 	curve_2.SetRotation(-30, vec3(0, 1, 0));
 	walls.add(curve_2);
+	//------------------------
 	Cube curve_3(1, 2, 8);
 	curve_3.SetPos(2, 0.9f, 47.3);
 	curve_3.SetRotation(60, vec3(0, 1, 0));
 	walls.add(curve_3);
-	Cube curve_3_1(1, 2, 8);
-	curve_3_1.SetPos(7, 0.9f, 50.3);
-	curve_3_1.SetRotation(59, vec3(0, 1, 0));
-	walls.add(curve_3_1);
-    //front------------------------
-	Cube curve_4(1, 2, 13);
-	curve_4.SetPos(-8.2, 0.9f,40.4);
-	curve_4.SetRotation(-30, vec3(0, 1, 0));
+	//------------------------
+	Cube curve_4(1, 2, 8);
+	curve_4.SetPos(7, 0.9f, 50.3);
+	curve_4.SetRotation(59, vec3(0, 1, 0));
 	walls.add(curve_4);
-	Cube curve_5(1, 2, 6);
-	curve_5.SetPos(-11.5, 0.9f, 49);
+	//------------------------
+	Cube curve_5(1, 2, 13);
+	curve_5.SetPos(13.2, 0.9f, 57.3);
+	curve_5.SetRotation(30, vec3(0, 1, 0));
 	walls.add(curve_5);
-	Cube curve_6(1, 2, 13);
-	curve_6.SetPos(-5.7, 0.9f, 55);
-	curve_6.SetRotation(60, vec3(0,1,0));
+	//------------------------
+	Cube curve_6(1, 2, 10);
+	curve_6.SetPos(17.5, 0.9f, 67.3);
+	curve_6.SetRotation(15, vec3(0, 1, 0));
 	walls.add(curve_6);
-	Cube curve_6_1(1, 2, 8);
-	curve_6_1.SetPos(-0.3, 0.9f, 58);
-	curve_6_1.SetRotation(60, vec3(0, 1, 0));
-	walls.add(curve_6_1);
-   //------------------------
+
+    //front------------------------
+	Cube curve_1f(1, 2, 13);
+	curve_1f.SetPos(-8.2, 0.9f,40.4);
+	curve_1f.SetRotation(-30, vec3(0, 1, 0));
+	walls.add(curve_1f);
+	//------------------------
+	Cube curve_2f(1, 2, 6);
+	curve_2f.SetPos(-11.5, 0.9f, 49);
+	walls.add(curve_2f);
+	//------------------------
+	Cube curve_3f(1, 2, 13);
+	curve_3f.SetPos(-5.7, 0.9f, 55);
+	curve_3f.SetRotation(60, vec3(0,1,0));
+	walls.add(curve_3f);
+	//------------------------
+	Cube curve_4f(1, 2, 8);
+	curve_4f.SetPos(-0.4, 0.9f, 58);
+	curve_4f.SetRotation(60, vec3(0, 1, 0));
+	walls.add(curve_4f);
+    //------------------------
+	Cube curve_5f(1, 2, 10);
+	curve_5f.SetPos(5.4, 0.9f, 64.1);
+	curve_5f.SetRotation(30, vec3(0, 1, 0));
+	walls.add(curve_5f);
+    //------------------------
+	Cube curve_6f(1, 2, 9);
+	curve_6f.SetPos(9, 0.9f, 72.5);
+	curve_6f.SetRotation(15, vec3(0, 1, 0));
+	walls.add(curve_6f);
+	//------------------------
 
 
 	//colisionador-----------------------------
