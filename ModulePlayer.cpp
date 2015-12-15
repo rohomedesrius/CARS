@@ -21,7 +21,7 @@ bool ModulePlayer::Start()
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(2, 1, 4);
+	car.chassis_size.Set(3, 1, 5);
 	car.chassis_offset.Set(0, 1, 0);
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
@@ -36,8 +36,9 @@ bool ModulePlayer::Start()
 	distCamera = { -11.0f, 4.0f, -11.0f };
 
 	// Wheel properties ---------------------------------------
-	float connection_height = 1.1f;
-	float wheel_radius1 = 0.6f;
+	float connection_height = 1.4f;
+	float wheel_radius1 = 0.5f;
+	float wheel_radius2 = 0.8f;
 	float wheel_width1 = 0.5f;
 	float wheel_width2 = 1.0f;
 	float suspensionRestLength = 1.2f;
@@ -118,18 +119,18 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	
+	/*
 	int speedCam = 1;
 	vec3 p = vehicle->getPos();
 	btVector3 vehicle_vector = vehicle->vehicle->getForwardVector();
 	vec3 f(vehicle_vector.getX(), vehicle_vector.getY(), vehicle_vector.getZ());
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN){
-		distCamera = { -2.0f, 2.0f, -4.0f };
+		distCamera = { -4.0f, 1.0f, -8.0f };
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN){
-		distCamera = { -11.0f, 4.0f, -11.0f };
+		distCamera = { -20.0f, 8.0f, -15.0f };
 	}
 
 	vec3 camera_new_position = { p.x + (f.x * distCamera.x), p.y + f.y + distCamera.y, p.z + (f.z * distCamera.z) };
@@ -137,7 +138,7 @@ update_status ModulePlayer::Update(float dt)
 	vec3 reference(p.x, p.y, p.z);
 
 	App->camera->Look(App->camera->Position + (speedCam * speed_camera), reference);
-	
+	*/
 
 	turn = acceleration = brake = 0.0f;
 

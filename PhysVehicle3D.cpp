@@ -48,8 +48,51 @@ void PhysVehicle3D::Render()
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
+	Cube frontchassis(info.chassis_size.x*0.30f, info.chassis_size.y, info.chassis_size.z*0.2f);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&frontchassis.transform);
+	btQuaternion q2 = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 offset2(info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z + 3);
+	offset2 = offset2.rotate(q2.getAxis(), q2.getAngle());
+
+	frontchassis.transform.M[12] += offset2.getX();
+	frontchassis.transform.M[13] += offset2.getY();
+	frontchassis.transform.M[14] += offset2.getZ();
+
+	Cube frontchassis2(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z*0.2f);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&frontchassis2.transform);
+	btQuaternion q3 = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 offset3(info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z + 4);
+	offset3 = offset3.rotate(q3.getAxis(), q3.getAngle());
+
+	frontchassis2.transform.M[12] += offset3.getX();
+	frontchassis2.transform.M[13] += offset3.getY();
+	frontchassis2.transform.M[14] += offset3.getZ();
+
+	Cube driver(info.chassis_size.x*0.30f, info.chassis_size.y, info.chassis_size.z*0.70f);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&driver.transform);
+	btQuaternion q4 = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 offset4(info.chassis_offset.x, info.chassis_offset.y + 0.65, info.chassis_offset.z - 1.5);
+	offset4 = offset4.rotate(q4.getAxis(), q4.getAngle());
+
+	driver.transform.M[12] += offset4.getX();
+	driver.transform.M[13] += offset4.getY();
+	driver.transform.M[14] += offset4.getZ();
+
+	Cube aileron(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z*0.2f);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&aileron.transform);
+	btQuaternion q5 = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 offset5(info.chassis_offset.x, info.chassis_offset.y + 1.65, info.chassis_offset.z - 2.75);
+	offset5 = offset5.rotate(q5.getAxis(), q5.getAngle());
+
+	aileron.transform.M[12] += offset5.getX();
+	aileron.transform.M[13] += offset5.getY();
+	aileron.transform.M[14] += offset5.getZ();
 
 	chassis.Render();
+	frontchassis.Render();
+	frontchassis2.Render();
+	driver.Render();
+	aileron.Render();
 }
 
 // ----------------------------------------------------------------------------

@@ -17,13 +17,10 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
-
 	//circuit
 	//rect_one--------------
 	Cube rect_1(1, 2, 70);
-	rect_1.SetPos(5,0.9f,0);
+	rect_1.SetPos(10,0.9f,0);
 	walls.add(rect_1);
 	//front----------------------
 	Cube rect_1f(1, 2, 70);
@@ -31,46 +28,46 @@ bool ModuleSceneIntro::Start()
 	walls.add(rect_1f);
 	//curve_one-----------
 	Cube curve_1(1, 2, 7);
-	curve_1.SetPos(3.5,0.9f,37.5);
+	curve_1.SetPos(8.5,0.9f,37.5);
 	curve_1.SetRotation(-30, vec3(0,1, 0));
 	walls.add(curve_1);
 	//------------------------
 	Cube curve_2(1, 2, 7);
-	curve_2.SetPos(0.7, 0.9f, 42.5);
+	curve_2.SetPos(5.7, 0.9f, 42.5);
 	curve_2.SetRotation(-30, vec3(0, 1, 0));
 	walls.add(curve_2);
 	//------------------------
 	Cube curve_3(1, 2, 8);
-	curve_3.SetPos(2, 0.9f, 47.3);
+	curve_3.SetPos(7, 0.9f, 47.3);
 	curve_3.SetRotation(60, vec3(0, 1, 0));
 	walls.add(curve_3);
 	//------------------------
 	Cube curve_4(1, 2, 8);
-	curve_4.SetPos(7, 0.9f, 50.3);
+	curve_4.SetPos(12, 0.9f, 50.3);
 	curve_4.SetRotation(59, vec3(0, 1, 0));
 	walls.add(curve_4);
 	//------------------------
 	Cube curve_5(1, 2, 13);
-	curve_5.SetPos(13.2, 0.9f, 57.3);
+	curve_5.SetPos(18.2, 0.9f, 57.3);
 	curve_5.SetRotation(30, vec3(0, 1, 0));
 	walls.add(curve_5);
 	//------------------------
 	Cube curve_6(1, 2, 10);
-	curve_6.SetPos(17.5, 0.9f, 67.3);
+	curve_6.SetPos(22.5, 0.9f, 67.3);
 	curve_6.SetRotation(15, vec3(0, 1, 0));
 	walls.add(curve_6);
 	//------------------------
 	Cube curve_7(1, 2, 10);
-	curve_7.SetPos(18.9, 0.9f, 76.5);
+	curve_7.SetPos(23.9, 0.9f, 76.5);
 	walls.add(curve_7);
 	//------------------------
 	Cube curve_8(1, 2, 10);
-	curve_8.SetPos(17.9, 0.9f, 85.3);
+	curve_8.SetPos(22.9, 0.9f, 85.3);
 	curve_8.SetRotation(-15, vec3(0, 1, 0));
 	walls.add(curve_8);
 	//------------------------
 	Cube curve_9(1, 2, 13);
-	curve_9.SetPos(14.9, 0.9f, 96.2);
+	curve_9.SetPos(19.9, 0.9f, 96.2);
 	curve_9.SetRotation(-15, vec3(0, 1, 0));
 	walls.add(curve_9);
 
@@ -119,7 +116,7 @@ bool ModuleSceneIntro::Start()
 	walls.add(curve_9f);
 	//rect_two-----------------
 	Cube rect_2(1, 2, 32);
-	rect_2.SetPos(-0.6, 0.9f, 109.9);
+	rect_2.SetPos( 5.6, 0.9f, 109.9);
 	rect_2.SetRotation(-60, vec3(0, 1, 0));
 	walls.add(rect_2);
 	//-------------------------
@@ -135,17 +132,10 @@ bool ModuleSceneIntro::Start()
 		App->physics->AddBody(item->data, 0.0f);
 		item = item->next;
 	}
-
-
-
-
-
-
 	
-
-	s.size = vec3(5, 3, 1);
-	s.SetPos(0, 2.5f, 20);
-
+	//Sensor
+	s.size = vec3(9, 3, 1);
+	s.SetPos(0, 2, 0);
 	sensor = App->physics->AddBody(s, 0.0f);
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
@@ -167,9 +157,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-
+	
 	sensor->GetTransform(&s.transform);
-	s.Render();
 
 	p2List_item<Cube>* item = walls.getFirst();
 	while (item != NULL)
