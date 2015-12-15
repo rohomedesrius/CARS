@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 ﻿Build started 15/12/2015 22:54:39.
      1>Project "C:\Users\Sergio\Documents\GitHub\CARS\3D Physics.vcxproj" on node 2 (Build target(s)).
+=======
+﻿Build started 15/12/2015 19:33:35.
+     1>Project "C:\Users\Roger\Desktop\CARS\3D Physics.vcxproj" on node 2 (Build target(s)).
+>>>>>>> origin/master
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl- /Od /Oy- /D _MBCS /Gm /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ModuleSceneIntro.cpp
          ModuleSceneIntro.cpp
@@ -44,4 +49,8 @@
 
 Build succeeded.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:06.39
+=======
+Time Elapsed 00:00:01.06
+>>>>>>> origin/master
