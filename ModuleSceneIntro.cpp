@@ -16,6 +16,7 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
+	laps =  0;
 
 	//circuit
 	//rect_one--------------
@@ -166,8 +167,8 @@ bool ModuleSceneIntro::Start()
 	}
 	
 	//Sensor Meta
-	s.size = vec3(15, 3, 1);
-	s.SetPos(2.5, 2, 0);
+	s.size = vec3(15, 3, 0);
+	s.SetPos(2.5, 2, 10);
 	sensor = App->physics->AddBody(s, 0.0f);
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
@@ -203,8 +204,18 @@ update_status ModuleSceneIntro::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
+int ModuleSceneIntro::getBestLap(){
+	return 0;
+}
+
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	LOG("Hit!");
+	if (body1->type == SensorType::objective){
+		if (laps != 3)
+		crono.Start();
+		laps++;
+	}
 }
+
+
 

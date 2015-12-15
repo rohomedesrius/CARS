@@ -30,7 +30,7 @@ bool ModulePlayer::Start()
 	car.maxSuspensionTravelCm = 1000.0f;
 	car.frictionSlip = 50.5;
 	car.maxSuspensionForce = 3000.0f;
-	car.fuel = 500.0f;
+	car.fuel = 2000.0f;
 
 	//Car Camera
 	distCamera = { -11.0f, 4.0f, -11.0f };
@@ -119,7 +119,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	/*
+	
 	int speedCam = 1;
 	vec3 p = vehicle->getPos();
 	btVector3 vehicle_vector = vehicle->vehicle->getForwardVector();
@@ -138,42 +138,60 @@ update_status ModulePlayer::Update(float dt)
 	vec3 reference(p.x, p.y, p.z);
 
 	App->camera->Look(App->camera->Position + (speedCam * speed_camera), reference);
-	*/
+	
 
 	turn = acceleration = brake = 0.0f;
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	{
-		acceleration = MAX_ACCELERATION;
-		vehicle->info.fuel = vehicle->info.fuel - 0.5f;
-	}
+	if (vehicle->info.fuel != 0 && App->scene_intro->laps <= 5){
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			acceleration = MAX_ACCELERATION;
+			vehicle->info.fuel = vehicle->info.fuel - 1.0f;
+		}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-	}
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			if (turn < TURN_DEGREES)
+				turn += TURN_DEGREES;
+		}
 
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			if (turn > -TURN_DEGREES)
+				turn -= TURN_DEGREES;
+		}
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		acceleration = -MAX_ACCELERATION;
-	}
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			acceleration = -MAX_ACCELERATION;
+			vehicle->info.fuel = vehicle->info.fuel - 0.3f;
+		}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
-	{
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+		{
+			brake = BRAKE_POWER;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+		{
+			vehicle->SetPos(vehicle->getPos().x, vehicle->getPos().y + 3, vehicle->getPos().z);
+
+		}
+		char title[80];
+		sprintf_s(title, "%.1f Km/h, %.1f L of fuel, %.1is current time", vehicle->GetKmh(), vehicle->info.fuel, App->scene_intro->crono.Read() / 1000);
+		App->window->SetTitle(title);
+	}
+	else if (vehicle->info.fuel == 0){
+			brake = BRAKE_POWER;
+			char title[80];
+			sprintf_s(title, "YOU HAVE RUN OUT OF FUEL, SORRY");
+			App->window->SetTitle(title);
+	}
+	else if (App->scene_intro->laps >= 5){
 		brake = BRAKE_POWER;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		vehicle->SetPos(vehicle->getPos().x, vehicle->getPos().y + 3, vehicle->getPos().z);
-
+		char title[80];
+		sprintf_s(title, "YOU HAVE COMPLETED THE RACE, BEST TIME %.1is", App->scene_intro->getBestLap());
+		App->window->SetTitle(title);
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
@@ -181,10 +199,6 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
-
-	char title[80];
-	sprintf_s(title, "%.1f Km/h, %.1f L of fuel", vehicle->GetKmh(), vehicle->info.fuel);
-	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }
