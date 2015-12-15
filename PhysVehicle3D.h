@@ -36,6 +36,7 @@ struct VehicleInfo
 
 	Wheel* wheels;
 	int num_wheels;
+	float fuel;
 };
 
 
