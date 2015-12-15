@@ -133,12 +133,13 @@ bool ModuleSceneIntro::Start()
 		item = item->next;
 	}
 	
-	//Sensor
-	s.size = vec3(9, 3, 1);
-	s.SetPos(0, 2, 0);
+	//Sensor Meta
+	s.size = vec3(15, 3, 1);
+	s.SetPos(2.5, 2, 0);
 	sensor = App->physics->AddBody(s, 0.0f);
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
+	sensor->type = SensorType::objective;
 
 	return ret;
 }
