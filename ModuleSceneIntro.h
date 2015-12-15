@@ -23,5 +23,6 @@ public:
 
 public:
 	Cube s;
+	p2List<Cube> walls;
 	PhysBody3D* sensor;
 };
