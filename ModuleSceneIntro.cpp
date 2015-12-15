@@ -26,9 +26,9 @@ bool ModuleSceneIntro::Start()
 	rect_1.SetPos(5,0.9f,0);
 	walls.add(rect_1);
 	//front----------------------
-	Cube rect_2(1, 2, 70);
-	rect_2.SetPos(-5,0.9f,0);
-	walls.add(rect_2);
+	Cube rect_1f(1, 2, 70);
+	rect_1f.SetPos(-5,0.9f,0);
+	walls.add(rect_1f);
 	//curve_one-----------
 	Cube curve_1(1, 2, 7);
 	curve_1.SetPos(3.5,0.9f,37.5);
@@ -59,6 +59,20 @@ bool ModuleSceneIntro::Start()
 	curve_6.SetPos(17.5, 0.9f, 67.3);
 	curve_6.SetRotation(15, vec3(0, 1, 0));
 	walls.add(curve_6);
+	//------------------------
+	Cube curve_7(1, 2, 10);
+	curve_7.SetPos(18.9, 0.9f, 76.5);
+	walls.add(curve_7);
+	//------------------------
+	Cube curve_8(1, 2, 10);
+	curve_8.SetPos(17.9, 0.9f, 85.3);
+	curve_8.SetRotation(-15, vec3(0, 1, 0));
+	walls.add(curve_8);
+	//------------------------
+	Cube curve_9(1, 2, 13);
+	curve_9.SetPos(14.9, 0.9f, 96.2);
+	curve_9.SetRotation(-15, vec3(0, 1, 0));
+	walls.add(curve_9);
 
     //front------------------------
 	Cube curve_1f(1, 2, 13);
@@ -90,6 +104,29 @@ bool ModuleSceneIntro::Start()
 	curve_6f.SetRotation(15, vec3(0, 1, 0));
 	walls.add(curve_6f);
 	//------------------------
+	Cube curve_7f(1, 2, 5);
+	curve_7f.SetPos(10.2, 0.9f, 79.2);
+	walls.add(curve_7f);
+	//------------------------
+	Cube curve_8f(1, 2, 6);
+	curve_8f.SetPos(9.5, 0.9f, 84.5);
+	curve_8f.SetRotation(-15, vec3(0, 1, 0));
+	walls.add(curve_8f);
+	//-------------------------
+	Cube curve_9f(1, 2, 7);
+	curve_9f.SetPos(7.9, 0.9f, 90.5);
+	curve_9f.SetRotation(-15, vec3(0, 1, 0));
+	walls.add(curve_9f);
+	//rect_two-----------------
+	Cube rect_2(1, 2, 32);
+	rect_2.SetPos(-0.6, 0.9f, 109.9);
+	rect_2.SetRotation(-60, vec3(0, 1, 0));
+	walls.add(rect_2);
+	//-------------------------
+	Cube rect_2f(1, 2, 30);
+	rect_2f.SetPos(-5.7, 0.9f, 100.9);
+	rect_2f.SetRotation(-60, vec3(0, 1, 0));
+	walls.add(rect_2f);
 
 
 	//colisionador-----------------------------
