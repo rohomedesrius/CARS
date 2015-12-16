@@ -149,14 +149,58 @@ bool ModuleSceneIntro::Start()
 	walls.add(rect_3f);
 
 	//curve_three-------------------------------------
-	Cube curve_11(1, 2, 10);
-	curve_11.SetPos(-30, 0.9f,138);
+	Cube curve_11(1, 2, 20);
+	curve_11.SetPos(-38.3, 0.9f,140);
 	curve_11.SetRotation(-75, vec3(0, 1, 0));
 	walls.add(curve_11);
-	//front-------------------------------------------
+	//------------------------------------------------
+	Cube curve_12(1, 2, 7);
+	curve_12.SetPos(-50.5, 0.9f, 142.5);
+	curve_12.SetRotation(-90, vec3(0, 1, 0));
+	walls.add(curve_12);
+	//------------------------------------------------
+	Cube curve_13(1, 2, 20);
+	curve_13.SetPos(-63, 0.9f, 142.5);
+	curve_13.SetRotation(-90, vec3(0, 1, 0));
+	walls.add(curve_13);
+	//------------------------------------------------
+	Cube curve_14(1, 2, 20);
+	curve_14.SetPos(-80, 0.9f, 138);
+	curve_14.SetRotation(-120, vec3(0, 1, 0));
+	walls.add(curve_14);
+	//------------------------------------------------
+	Cube curve_15(1, 2, 12);
+	curve_15.SetPos(-89.7, 0.9f, 130);
+	curve_15.SetRotation(-160, vec3(0, 1, 0));
+	walls.add(curve_15);
 
-	
-	
+	//front-------------------------------------------
+	Cube curve_11f(1, 2, 12);
+	curve_11f.SetPos(-46.4, 0.9f, 130);
+	curve_11f.SetRotation(-75, vec3(0, 1, 0));
+	walls.add(curve_11f);
+	//------------------------------------------------
+	Cube curve_12f(1, 2, 17);
+	curve_12f.SetPos(-60, 0.9f, 131.4);
+	curve_12f.SetRotation(-90, vec3(0, 1, 0));
+	walls.add(curve_12f);
+	//------------------------------------------------
+	Cube curve_13f(1, 2, 12);
+	curve_13f.SetPos(-73.5, 0.9f, 128.5);
+	curve_13f.SetRotation(-120, vec3(0, 1, 0));
+	walls.add(curve_13f);
+	//------------------------------------------------
+	Cube curve_14f(1, 2, 5);
+	curve_14f.SetPos(-79.4, 0.9f, 123.5);
+	curve_14f.SetRotation(-160, vec3(0, 1, 0));
+	walls.add(curve_14f);
+
+
+	//rect_four----------------------------------------
+	Cube rect_4(1, 2, 12);
+	rect_4.SetPos(-89.7, 0.9f, 130);
+	rect_4.SetRotation(-160, vec3(0, 1, 0));
+	walls.add(rect_4);
 	
 	//colisionador-----------------------------
 	p2List_item<Cube>* item = walls.getFirst();
