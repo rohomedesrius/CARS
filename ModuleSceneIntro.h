@@ -20,9 +20,12 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
-
+	int getBestLap();
 public:
 	Cube s;
 	p2List<Cube> walls;
 	PhysBody3D* sensor;
+	Timer crono;
+	int laps;
+	p2List<int> timeLaps;
 };
