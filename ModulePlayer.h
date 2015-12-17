@@ -18,13 +18,15 @@ public:
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
-
+	
 public:
 
 	PhysVehicle3D* vehicle;
 	float turn;
 	float acceleration;
 	float brake;
-
+	
 	vec3 distCamera;
+
+	void Refill();
 };

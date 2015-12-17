@@ -88,11 +88,19 @@ void PhysVehicle3D::Render()
 	aileron.transform.M[13] += offset5.getY();
 	aileron.transform.M[14] += offset5.getZ();
 
+	chassis.color = Blue;
+	frontchassis.color = Green;
+	frontchassis2.color = Green;
+	driver.color = Green;
+	aileron.color = Blue;
+
 	chassis.Render();
 	frontchassis.Render();
 	frontchassis2.Render();
 	driver.Render();
 	aileron.Render();
+
+	
 }
 
 // ----------------------------------------------------------------------------

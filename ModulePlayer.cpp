@@ -5,6 +5,8 @@
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
 
+int x = 0;
+
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
@@ -30,10 +32,10 @@ bool ModulePlayer::Start()
 	car.maxSuspensionTravelCm = 1000.0f;
 	car.frictionSlip = 50.5;
 	car.maxSuspensionForce = 3000.0f;
-	car.fuel = 2000.0f;
+	car.fuel = 5000.0f;
 
 	//Car Camera
-	distCamera = { -11.0f, 4.0f, -11.0f };
+	distCamera = { -20.0f, 8.0f, -15.0f };
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.4f;
@@ -116,17 +118,21 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
+void ModulePlayer::Refill(){
+	vehicle->info.fuel = vehicle->info.fuel + 750;
+}
+
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	
+	//CAMERA-------------------------------------------------------------------------------
 	int speedCam = 1;
 	vec3 p = vehicle->getPos();
 	btVector3 vehicle_vector = vehicle->vehicle->getForwardVector();
 	vec3 f(vehicle_vector.getX(), vehicle_vector.getY(), vehicle_vector.getZ());
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN){
-		distCamera = { -4.0f, 1.0f, -8.0f };
+		distCamera = { 20.0f, 8.0f, 15.0f };
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN){
@@ -138,11 +144,11 @@ update_status ModulePlayer::Update(float dt)
 	vec3 reference(p.x, p.y, p.z);
 
 	App->camera->Look(App->camera->Position + (speedCam * speed_camera), reference);
-	
+	//----------------------------------------------------------------------------------
 
 	turn = acceleration = brake = 0.0f;
 
-	if (vehicle->info.fuel != 0 && App->scene_intro->laps <= 5){
+	if (vehicle->info.fuel > 0 && App->scene_intro->laps <= 3){
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
 			acceleration = MAX_ACCELERATION;
@@ -181,17 +187,22 @@ update_status ModulePlayer::Update(float dt)
 		sprintf_s(title, "%.1f Km/h, %.1f L of fuel, %.1is current time", vehicle->GetKmh(), vehicle->info.fuel, App->scene_intro->crono.Read() / 1000);
 		App->window->SetTitle(title);
 	}
-	else if (vehicle->info.fuel == 0){
+	else if (vehicle->info.fuel <= 0){
 			brake = BRAKE_POWER;
 			char title[80];
 			sprintf_s(title, "YOU HAVE RUN OUT OF FUEL, SORRY");
 			App->window->SetTitle(title);
 	}
-	else if (App->scene_intro->laps >= 5){
+	else if (App->scene_intro->laps >= 3){
 		brake = BRAKE_POWER;
 		char title[80];
-		sprintf_s(title, "YOU HAVE COMPLETED THE RACE, BEST TIME %.1is", App->scene_intro->getBestLap());
+		sprintf_s(title, "YOU HAVE COMPLETED THE RACE, BEST TIME %.1is", App->scene_intro->getBestLap() / 1000);
 		App->window->SetTitle(title);
+	}
+
+	if (x == 100){
+		App->scene_intro->sensorObjective = true;
+		x = 0;
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
@@ -199,6 +210,8 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
+
+	x++;
 
 	return UPDATE_CONTINUE;
 }

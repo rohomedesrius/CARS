@@ -330,12 +330,25 @@ bool ModuleSceneIntro::Start()
 	
 	//Sensor Meta
 	s.size = vec3(15, 3, 0);
-	s.SetPos(2.5, 2, 10);
+	s.SetPos(2.5, 2, -13);
 	sensor = App->physics->AddBody(s, 0.0f);
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
 	sensor->type = SensorType::objective;
 
+	//Sensor Refill
+	s2.size = vec3(10, 3, 0);
+	s2.SetPos(-16, 2, -90);
+	sensor2 = App->physics->AddBody(s2, 0.0f);
+	sensor2->SetAsSensor(true);
+	sensor2->collision_listeners.add(this);
+	sensor2->type = SensorType::refill;
+
+	Cube pit_wall(10, 3, 0);
+	pit_wall.SetPos(-16, 8, -90);
+	pit_wall.color = Red;
+	walls.add(pit_wall);
+	
 	return ret;
 }
 
@@ -366,16 +379,29 @@ update_status ModuleSceneIntro::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
-int ModuleSceneIntro::getBestLap(){
-	return 0;
+Uint32 ModuleSceneIntro::getBestLap(){
+	p2List_item<Uint32>* tmp = lapTimes.getFirst();
+		bestLap = tmp->data;
+		for (; tmp->next; tmp = tmp->next){
+			if (bestLap > tmp->next->data)
+				bestLap = tmp->next->data;
+		}
+	return bestLap;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	if (body1->type == SensorType::objective){
-		if (laps != 3)
+	if (body1->type == SensorType::objective && sensorObjective == true){
+		if (laps <= 3)
+		lapTimes.add(crono.Read());
 		crono.Start();
 		laps++;
+		sensorObjective = false;
+	}
+
+	if (body1->type == SensorType::refill && sensorRefill == true){
+		App->player->Refill();
+		sensorRefill = false;
 	}
 }
 
