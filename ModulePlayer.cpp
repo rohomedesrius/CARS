@@ -147,6 +147,8 @@ update_status ModulePlayer::Update(float dt)
 	//----------------------------------------------------------------------------------
 	//Restart
 	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN){
+		vehicle->Stop();
+		vehicle->SetRotation(0, 0, 0);
 		vehicle->SetPos(0, 0, 0);
 		App->scene_intro->laps = 0;
 		App->scene_intro->lapTimes.clear();
