@@ -25,7 +25,8 @@ public:
 	void SetPos(float x, float y, float z);
 	void SetAsSensor(bool is_sensor);
 	bool IsSensor() const;
-
+	void Stop();
+	void SetRotation(float x, float y, float z);
 private:
 	btRigidBody* body = nullptr;
 	bool is_sensor = false;
