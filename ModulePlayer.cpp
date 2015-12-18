@@ -145,7 +145,15 @@ update_status ModulePlayer::Update(float dt)
 
 	App->camera->Look(App->camera->Position + (speedCam * speed_camera), reference);
 	//----------------------------------------------------------------------------------
-
+	//Restart
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN){
+		vehicle->SetPos(0, 0, 0);
+		App->scene_intro->laps = 0;
+		App->scene_intro->lapTimes.clear();
+		vehicle->info.fuel = 4000.0f;
+		App->scene_intro->crono.Start();
+	}
+	
 	turn = acceleration = brake = 0.0f;
 
 	if (vehicle->info.fuel > 0 && App->scene_intro->laps <= 3){
