@@ -32,7 +32,7 @@ bool ModulePlayer::Start()
 	car.maxSuspensionTravelCm = 1000.0f;
 	car.frictionSlip = 50.5;
 	car.maxSuspensionForce = 3000.0f;
-	car.fuel = 5000.0f;
+	car.fuel = 3500.0f;
 
 	//Car Camera
 	distCamera = { -20.0f, 8.0f, -15.0f };
@@ -152,7 +152,7 @@ update_status ModulePlayer::Update(float dt)
 		vehicle->SetPos(0, 0, 0);
 		App->scene_intro->laps = 0;
 		App->scene_intro->lapTimes.clear();
-		vehicle->info.fuel = 4000.0f;
+		vehicle->info.fuel = 3500.0f;
 		App->scene_intro->crono.Start();
 	}
 	
