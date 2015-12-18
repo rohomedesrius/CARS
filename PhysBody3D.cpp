@@ -66,3 +66,20 @@ bool PhysBody3D::IsSensor() const
 {
 	return is_sensor;
 }
+
+void PhysBody3D::SetRotation(float x, float y, float z)
+{
+	btTransform t = body->getWorldTransform();
+	btQuaternion q;
+	q.setEulerZYX(z, y, x);
+	t.setRotation(q);
+	body->setWorldTransform(t);
+}
+
+// ---------------------------------------------------------
+void PhysBody3D::Stop()
+{
+	body->setLinearVelocity(btVector3(0, 0, 0));
+	body->setAngularVelocity(btVector3(0, 0, 0));
+	body->clearForces();
+}
